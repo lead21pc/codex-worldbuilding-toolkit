@@ -1,4 +1,4 @@
-name: Validate skills
+name: Validate repository
 
 on:
   push:
@@ -16,7 +16,7 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Validate repository and skill metadata
+      - name: Validate skills and worldbuilding CI
         run: python3 scripts/validate_repository.py
 
       - name: Parse PowerShell scripts

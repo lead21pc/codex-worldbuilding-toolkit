@@ -1,29 +1,56 @@
-# Codex Workflow Skills
+# Worldbuilding CI and Codex Workflow Toolkit
 
 Version 1.0.0
 
-This repository contains six independently authored community skills for repeatable Codex workflows. Each skill is self-contained under `skills/` and includes its own instructions, invocation metadata, and any required references or scripts.
+## Problems this toolkit addresses
 
-These are not official OpenAI skills. Inspect any third-party skill before installing or invoking it, especially when it can modify files, Git state, or other local resources.
+Long-running AI-assisted work often fails in recognizable ways:
 
-## Included skills
+- drafts or simulations silently become established lore;
+- assumptions are promoted into project state without confirmation;
+- accumulated instructions cause instruction drift;
+- the model expands beyond the requested operation and causes scope drift;
+- source authority—the project rule for deciding which source controls a disputed claim—becomes ambiguous;
+- actor knowledge, authority, capability, and access are conflated;
+- repeated Custom Instructions patches create duplicate or conflicting rules;
+- complex behavioral instructions become difficult to maintain;
+- coding agents modify more files or behavior than the requested scope.
 
-| Skill | Purpose | Implicit invocation | Can modify files or state? | Typical use |
-| --- | --- | --- | --- | --- |
-| `milestone-executor` | Complete one bounded repository milestone without scope drift | Yes | Yes, within the requested milestone | Implement a named issue or acceptance-criteria block |
-| `systematic-debugging` | Establish a failure and root cause before applying a focused fix | Yes | Yes, after diagnosis when a fix is requested | Diagnose a regression or failing test |
-| `review-before-merge` | Perform a read-only, defect-first review of a completed change | Yes | No | Review a branch, commit, or working-tree diff before acceptance |
-| `git-test-branch` | Prepare an isolated local Git branch while preserving existing work | No | Yes, local Git branch state | Create or switch to a temporary test branch |
-| `ci-behavior-engineering` | Audit, design, patch, compact, or test Custom Instructions behavior | No | Only when the requested operation requires it | Trace a Custom Instructions regression before patching |
-| `worldbuilding-source-audit` | Audit worldbuilding claims against project-declared sources and authority rules | Yes | Read-only by default; source changes require an explicit request | Trace a lore claim, contradiction, or unresolved source question |
+This repository addresses those failures through two independent layers:
 
-## Installation
+1. **Worldbuilding behavioral Custom Instructions (CI):** reusable instructions that control how a model handles project state, evidence, scope, simulation, and audit. Here, `CI` means *Custom Instructions*, not Continuous Integration.
+2. **Codex skills:** reusable workflow packages for bounded implementation, debugging, review, Git isolation, CI behavior engineering, and worldbuilding source audit.
 
-Codex skills are directories containing a required `SKILL.md`. See the [OpenAI skill documentation](https://developers.openai.com/docs/build-skills) for current discovery locations and invocation behavior.
+Use only the behavioral CI, only the Codex skills, or both. Neither layer requires the other.
 
-### Install one skill manually
+These are independently authored community resources, not official OpenAI components. Inspect third-party instructions before using them, especially when they can modify files or Git state.
 
-Clone this repository, then copy one skill into your user skill directory:
+## Quick start
+
+### Worldbuilding CI
+
+Choose the lightest level that fits the task:
+
+1. **Minimal — CORE only.** Start with [`worldbuilding-ci/core/GENERIC_WORLDBUILDING_CI_CORE.md`](worldbuilding-ci/core/GENERIC_WORLDBUILDING_CI_CORE.md) for ordinary lore discussion and project-state control.
+2. **Advanced — CORE plus selected modules.** Add [`WORLD_MODEL`](worldbuilding-ci/modules/WORLD_MODEL.md), [`SIMULATION`](worldbuilding-ci/modules/SIMULATION.md), or [`AUDIT`](worldbuilding-ci/modules/AUDIT.md) only when the task needs them.
+3. **Full — FULL_PROFILE.** Use [`worldbuilding-ci/profiles/FULL_PROFILE.md`](worldbuilding-ci/profiles/FULL_PROFILE.md) when world modeling, causal simulation, and source auditing are all relevant.
+
+`FULL_PROFILE` is an advanced option, not a required or universally recommended configuration. The files are instruction text; copy the selected contents into the instruction context supported by your AI tool.
+
+See the [minimal example](worldbuilding-ci/examples/minimal-example.md) and [full example](worldbuilding-ci/examples/full-example.md).
+
+### Codex skills
+
+Each skill lives at an actual repository path under `skills/`:
+
+- `skills/milestone-executor/`
+- `skills/systematic-debugging/`
+- `skills/review-before-merge/`
+- `skills/git-test-branch/`
+- `skills/ci-behavior-engineering/`
+- `skills/worldbuilding-source-audit/`
+
+Install one skill manually from the repository root:
 
 ```bash
 mkdir -p ~/.agents/skills
@@ -37,81 +64,112 @@ New-Item -ItemType Directory -Force "$HOME\.agents\skills" | Out-Null
 Copy-Item -Recurse ".\skills\milestone-executor" "$HOME\.agents\skills\"
 ```
 
-For repository-local use, copy the skill into `.agents/skills/` at the repository root instead.
+Install selected skills by repeating the copy command with their repository paths. For repository-local use, copy them into `.agents/skills/` at the target repository root. Restart Codex if a newly copied skill is not discovered automatically.
 
-### Install multiple skills manually
+When `$skill-installer` is available after this repository is published, provide its repository URL and the exact path, such as `skills/milestone-executor`. Do not use a placeholder owner or URL as though publication has already occurred.
 
-Copy only the directories you want:
-
-```bash
-mkdir -p ~/.agents/skills
-cp -R skills/systematic-debugging skills/review-before-merge ~/.agents/skills/
-```
-
-PowerShell equivalent:
-
-```powershell
-$skills = @("systematic-debugging", "review-before-merge")
-New-Item -ItemType Directory -Force "$HOME\.agents\skills" | Out-Null
-foreach ($skill in $skills) {
-    Copy-Item -Recurse ".\skills\$skill" "$HOME\.agents\skills\"
-}
-```
-
-Restart Codex if a newly copied skill is not discovered automatically.
-
-### Install with Skill Installer
-
-When `$skill-installer` is available, ask it to install one or more paths from the public GitHub repository after publication:
+## Repository components
 
 ```text
-$skill-installer
-Install from https://github.com/OWNER/codex-workflow-skills using path skills/milestone-executor.
+.
+├── worldbuilding-ci/
+│   ├── core/
+│   │   └── GENERIC_WORLDBUILDING_CI_CORE.md
+│   ├── modules/
+│   │   ├── WORLD_MODEL.md
+│   │   ├── SIMULATION.md
+│   │   └── AUDIT.md
+│   ├── profiles/
+│   │   └── FULL_PROFILE.md
+│   └── examples/
+│       ├── minimal-example.md
+│       └── full-example.md
+├── skills/
+│   ├── milestone-executor/
+│   ├── systematic-debugging/
+│   ├── review-before-merge/
+│   ├── git-test-branch/
+│   ├── ci-behavior-engineering/
+│   └── worldbuilding-source-audit/
+├── scripts/
+│   └── validate_repository.py
+└── .github/workflows/
+    └── validate-skills.yml
 ```
 
-For multiple skills, provide multiple repository paths in the same request. Replace `OWNER` with the published repository owner. Skill Installer aborts when a destination directory already exists; inspect or remove the existing installation deliberately before retrying.
+### Worldbuilding behavioral CI
 
-## Invocation
+- **CORE** owns general interaction control, state mutation, evidence, uncertainty, proposal boundaries, and explanation.
+- **WORLD_MODEL** adds optional entity, relation, actor-information, authority, capability, and access distinctions.
+- **SIMULATION** adds optional causal-path and second-order-effect discipline.
+- **AUDIT** adds optional source and system scrutiny.
+- **FULL_PROFILE** composes all four files without making the advanced configuration mandatory.
 
-Skills with implicit invocation enabled may be selected when a task matches their `description`. Any skill can also be invoked explicitly by naming it with `$skill-name`.
+### Codex skills
 
-`git-test-branch` is explicit-only because branch-changing operations should begin only when the user deliberately requests branch preparation. `ci-behavior-engineering` is explicit-only because it is a specialized Custom Instructions engineering workflow and should not activate during ordinary writing, debugging, or CI/CD work.
+| Skill | Purpose | Implicit invocation | Can modify files or state? |
+| --- | --- | --- | --- |
+| `milestone-executor` | Complete one bounded repository milestone without scope drift | Yes | Yes, within the requested milestone |
+| `systematic-debugging` | Establish a failure and root cause before applying a focused fix | Yes | Yes, after diagnosis when a fix is requested |
+| `review-before-merge` | Perform a read-only, defect-first review | Yes | No |
+| `git-test-branch` | Prepare an isolated local Git branch while preserving existing work | No | Yes, local Git branch state |
+| `ci-behavior-engineering` | Audit, design, patch, compact, or test Custom Instructions behavior | No | Only when the requested operation requires it |
+| `worldbuilding-source-audit` | Audit claims against project-declared sources and authority rules | Yes | Read-only by default |
 
-Examples:
+## Behavioral concepts
 
-```text
-Use $milestone-executor to implement milestone 3 exactly as specified and stop after its acceptance checks pass.
+- **Epistemic control** governs when an assumption, inference, or proposal may become supported or established state.
+- **Source authority** is the project-declared rule for deciding which source governs a disputed claim. The toolkit supplies no universal hierarchy.
+- **Anti-drift control** prevents stage, scope, project state, or source authority from changing merely because instructions accumulate or a claim is repeated.
+- A **router** is an optional instruction layer that selects relevant sources or modules. It should route inputs without inventing conclusions or a competing authority hierarchy.
 
-Use $systematic-debugging to reproduce this failing test, identify the root cause, and apply the smallest verified fix.
+The worldbuilding CI uses these controls to solve the failure modes listed above. Its architecture is the mechanism, not the primary reason to adopt it.
 
-Use $review-before-merge to review the current working-tree diff against the issue requirements.
+## Common workflows
 
-Use $git-test-branch to create a local test branch from the current branch without discarding existing work.
+### Focused lore discussion
 
-Use $ci-behavior-engineering to audit why this Custom Instructions revision changes response behavior before proposing a patch.
+Use CORE alone. Supply the relevant established state and ask the focused question. Drafts, alternatives, and simulations remain provisional until accepted.
 
-Use $worldbuilding-source-audit to trace this claim to the project's declared sources and report unresolved authority or contradictions.
-```
+### Actor or system simulation
+
+Use `CORE + WORLD_MODEL + SIMULATION`. Declare the starting state and material unknowns. Keep knowledge, access, capability, permission, authority, and effect separate.
+
+### Source or system scrutiny
+
+Use `CORE + AUDIT`; add WORLD_MODEL when actor or institutional distinctions matter. Declare the sources in scope and the project's authority policy. If authority is unresolved, the audit must not invent a winner.
+
+### Bounded repository implementation
+
+Use `$milestone-executor` with a named milestone, permitted scope, acceptance criteria, and stop condition. Use `$review-before-merge` afterward when a separate read-only review is needed.
+
+### CI behavior regression
+
+Use `$ci-behavior-engineering` to trace current wording through its trigger, interpretation, and failure path before proposing a patch.
 
 ## AGENTS.md, skills, and task prompts
 
-- `AGENTS.md` defines repository-specific rules, invariants, and working constraints.
-- A skill defines a reusable procedure for a recognizable class of tasks.
-- The task prompt states the work requested now, including its scope and authorization.
+- `AGENTS.md` defines repository-specific rules and constraints.
+- A skill defines a reusable procedure for a recognizable task.
+- The task prompt states the work authorized now.
 
-All three apply together. A skill does not override higher-priority instructions, repository invariants, or the current task's boundaries, and merely invoking a skill does not grant permission for unrelated or destructive actions.
+All three apply together. Invoking a skill does not authorize unrelated, destructive, or externally visible actions.
 
 ## Validation
 
-Run the dependency-free repository validator from the repository root:
+Run the dependency-free validator from the repository root:
 
 ```bash
 python scripts/validate_repository.py
 ```
 
-The validator checks skill structure, supported metadata, relative references, script syntax for Python files, the expected public skill inventory, and forbidden private strings. The GitHub workflow also asks PowerShell to parse `.ps1` scripts and runs basic smoke tests for the included utilities.
+It checks the six-skill inventory, skill metadata, required worldbuilding CI files, relative Markdown references, Python syntax, deprecated metadata, and forbidden private strings. The GitHub workflow also parses PowerShell scripts and smoke-tests the included utilities.
 
-This validator intentionally implements the smallest checks needed by this repository. It does not replace semantic review or prove runtime behavior.
+These checks validate structure and obvious leakage. They do not prove natural-language semantics or runtime model behavior; those remain manual review tasks.
+
+## Contributing
+
+Keep changes narrow and tied to a concrete failure mode. Preserve the independence of the CI and skills, avoid universal source hierarchies or user-specific language defaults, and do not duplicate core rules across modules. See [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## License
 

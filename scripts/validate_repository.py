@@ -12,6 +12,7 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 SKILLS_ROOT = ROOT / "skills"
+WORLD_BUILDING_CI_ROOT = ROOT / "worldbuilding-ci"
 EXPECTED_SKILLS = {
     "ci-behavior-engineering",
     "git-test-branch",
@@ -19,6 +20,15 @@ EXPECTED_SKILLS = {
     "review-before-merge",
     "systematic-debugging",
     "worldbuilding-source-audit",
+}
+EXPECTED_WORLD_BUILDING_CI_FILES = {
+    "core/GENERIC_WORLDBUILDING_CI_CORE.md",
+    "modules/AUDIT.md",
+    "modules/SIMULATION.md",
+    "modules/WORLD_MODEL.md",
+    "profiles/FULL_PROFILE.md",
+    "examples/full-example.md",
+    "examples/minimal-example.md",
 }
 
 
@@ -33,6 +43,7 @@ def forbidden_terms() -> list[str]:
         "chatgpt-" + "conversation",
         "memory_" + "summary",
         "rollout_" + "summaries",
+        "viet" + "namese",
     ]
 
 
@@ -150,6 +161,46 @@ def validate_skill(skill_dir: Path, errors: list[str]) -> None:
                 )
 
 
+def validate_worldbuilding_ci(errors: list[str]) -> None:
+    if not WORLD_BUILDING_CI_ROOT.is_dir():
+        errors.append("worldbuilding-ci directory is missing")
+        return
+
+    actual = {
+        path.relative_to(WORLD_BUILDING_CI_ROOT).as_posix()
+        for path in WORLD_BUILDING_CI_ROOT.rglob("*")
+        if path.is_file()
+    }
+    if actual != EXPECTED_WORLD_BUILDING_CI_FILES:
+        missing = sorted(EXPECTED_WORLD_BUILDING_CI_FILES - actual)
+        extra = sorted(actual - EXPECTED_WORLD_BUILDING_CI_FILES)
+        errors.append(
+            f"worldbuilding CI inventory mismatch; missing={missing}, extra={extra}"
+        )
+
+    core_path = WORLD_BUILDING_CI_ROOT / "core" / "GENERIC_WORLDBUILDING_CI_CORE.md"
+    if core_path.is_file():
+        core = read_text(core_path)
+        for module_name in ("WORLD_MODEL.md", "SIMULATION.md", "AUDIT.md"):
+            if module_name in core:
+                errors.append(f"{core_path.relative_to(ROOT)}: depends on {module_name}")
+
+    profile_path = WORLD_BUILDING_CI_ROOT / "profiles" / "FULL_PROFILE.md"
+    if profile_path.is_file():
+        profile = read_text(profile_path)
+        required = (
+            "GENERIC_WORLDBUILDING_CI_CORE.md",
+            "WORLD_MODEL.md",
+            "SIMULATION.md",
+            "AUDIT.md",
+        )
+        for component in required:
+            if component not in profile:
+                errors.append(
+                    f"{profile_path.relative_to(ROOT)}: missing component {component}"
+                )
+
+
 def validate_markdown_links(errors: list[str]) -> None:
     pattern = re.compile(r"\[[^\]]+\]\(([^)#]+)(?:#[^)]+)?\)")
     for path in ROOT.rglob("*.md"):
@@ -217,6 +268,8 @@ def main() -> int:
         ):
             validate_skill(skill_dir, errors)
 
+    validate_worldbuilding_ci(errors)
+
     validate_markdown_links(errors)
     validate_python(errors)
     scan_repository(errors)
@@ -227,7 +280,11 @@ def main() -> int:
             print(f"- {error}")
         return 1
 
-    print(f"VALIDATION: PASS ({len(EXPECTED_SKILLS)} skills)")
+    print(
+        "VALIDATION: PASS "
+        f"({len(EXPECTED_SKILLS)} skills, "
+        f"{len(EXPECTED_WORLD_BUILDING_CI_FILES)} worldbuilding CI files)"
+    )
     return 0
 
 

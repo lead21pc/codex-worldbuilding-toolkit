@@ -4,3 +4,5 @@
 
 - Initial public release.
 - Six public Codex skills.
+- Modular worldbuilding behavioral CI.
+- Minimal, advanced, and full worldbuilding CI usage profiles.
