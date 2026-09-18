@@ -1,0 +1,7 @@
+interface:
+  display_name: "Git Test Branch"
+  short_description: "Prepare isolated local Git test branches"
+  default_prompt: "Use $git-test-branch to prepare an isolated local branch for this milestone without discarding existing work."
+
+policy:
+  allow_implicit_invocation: false

@@ -1,0 +1,7 @@
+interface:
+  display_name: "Milestone Executor"
+  short_description: "Execute one bounded repository milestone"
+  default_prompt: "Use $milestone-executor to implement this named milestone and stop after its acceptance criteria are met."
+
+policy:
+  allow_implicit_invocation: true

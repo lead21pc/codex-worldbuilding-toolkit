@@ -1,0 +1,7 @@
+interface:
+  display_name: "CI Behavior Engineering"
+  short_description: "Audit and repair Custom Instructions behavior"
+  default_prompt: "Use $ci-behavior-engineering to audit this Custom Instructions regression before proposing a patch."
+
+policy:
+  allow_implicit_invocation: false

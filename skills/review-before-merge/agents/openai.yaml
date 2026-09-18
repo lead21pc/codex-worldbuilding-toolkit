@@ -1,0 +1,7 @@
+interface:
+  display_name: "Review Before Merge"
+  short_description: "Defect-first review before acceptance"
+  default_prompt: "Use $review-before-merge to review this completed change before merge or acceptance."
+
+policy:
+  allow_implicit_invocation: true

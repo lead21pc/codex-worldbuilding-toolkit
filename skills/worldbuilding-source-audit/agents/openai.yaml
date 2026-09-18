@@ -1,0 +1,7 @@
+interface:
+  display_name: "Worldbuilding Source Audit"
+  short_description: "Audit worldbuilding claims against declared sources"
+  default_prompt: "Use $worldbuilding-source-audit to trace this claim to the project's declared sources and report conflicts or unresolved uncertainty."
+
+policy:
+  allow_implicit_invocation: true

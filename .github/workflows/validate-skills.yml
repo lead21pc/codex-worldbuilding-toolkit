@@ -1,0 +1,52 @@
+name: Validate skills
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Validate repository and skill metadata
+        run: python3 scripts/validate_repository.py
+
+      - name: Parse PowerShell scripts
+        shell: pwsh
+        run: |
+          $errors = @()
+          Get-ChildItem -Path skills -Recurse -Filter *.ps1 | ForEach-Object {
+            $tokens = $null
+            $parseErrors = $null
+            [System.Management.Automation.Language.Parser]::ParseFile(
+              $_.FullName,
+              [ref]$tokens,
+              [ref]$parseErrors
+            ) | Out-Null
+            $errors += $parseErrors
+          }
+          if ($errors.Count -gt 0) {
+            $errors | Format-List
+            exit 1
+          }
+
+      - name: Smoke-test source inventory
+        run: >-
+          python3 skills/worldbuilding-source-audit/scripts/collect_source_inventory.py
+          skills/worldbuilding-source-audit/SKILL.md
+
+      - name: Smoke-test Custom Instructions inspector
+        shell: pwsh
+        run: |
+          & ./skills/ci-behavior-engineering/scripts/inspect-ci.ps1 `
+            -Path ./skills/ci-behavior-engineering/SKILL.md `
+            -ForbidBom `
+            -RequireFinalNewline

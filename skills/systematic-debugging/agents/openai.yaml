@@ -1,0 +1,7 @@
+interface:
+  display_name: "Systematic Debugging"
+  short_description: "Diagnose failures before editing code"
+  default_prompt: "Use $systematic-debugging to diagnose this failure, identify the root cause, and then apply the smallest verified fix."
+
+policy:
+  allow_implicit_invocation: true
