@@ -4,6 +4,9 @@ Keep changes narrow, evidence-based, and easy to review.
 
 - Preserve each skill's semantic purpose and authorization boundaries.
 - Preserve the behavioral CI core invariants and keep advanced modules optional.
+- Keep generic Codex skills domain-neutral and useful outside worldbuilding.
+- Do not let worldbuilding-specific assumptions leak into generic skills.
+- Worldbuilding modules may specialize behavior without changing generic skill semantics.
 - Do not broaden scope casually or add project-specific assumptions to generic components.
 - Do not add rules merely because they sound useful.
 - Avoid duplicate semantic rules across an entrypoint and its references.
