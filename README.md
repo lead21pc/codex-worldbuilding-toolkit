@@ -4,7 +4,12 @@
 
 Version 1.0.0
 
-**Primary target:** the worldbuilding CI is designed for **ChatGPT Projects**. The Codex skills are a separate repository-local workflow layer. Other AI tools may support comparable concepts, but this repository does not assume equivalent instruction precedence, project memory, file scoping, persistence, or runtime behavior across providers.
+**Primary target:** this toolkit combines two **independent but complementary** layers for long-running worldbuilding work:
+
+- **ChatGPT Project behavioral controls** for reasoning, project state, source authority, simulation, and audit.
+- **Optional Codex repository workflows** for bounded edits, source tracing, validation, diff review, branching, and provenance.
+
+Either layer can be used alone. Codex is **not required**, but it is the preferred companion when lore is maintained as structured files in a repository. Other AI tools may support comparable concepts, but this repository does not assume equivalent instruction precedence, project memory, file scoping, persistence, or runtime behavior across providers.
 
 <p align="center">
   <a href="worldbuilding-ci/core/GENERIC_WORLDBUILDING_CI_CORE.md">
@@ -50,6 +55,67 @@ Typical problems include:
 - coding agents modifying more than the requested scope.
 
 The toolkit provides reusable **worldbuilding Custom Instructions**, modular reasoning controls, source-audit workflows, and **Codex skills**.
+
+---
+
+## Two parallel layers
+
+The toolkit does not treat ChatGPT Project CI as the "main" system with Codex attached, or Codex as the "main" system with instructions attached.
+
+They solve different control problems:
+
+| Layer | Primary role | Typical state it controls |
+| --- | --- | --- |
+| **ChatGPT Project CI** | Governs how the model reasons, classifies claims, handles uncertainty, and changes project state | canon vs draft, evidence, assumptions, simulation state, source authority |
+| **Codex skills** | Governs how an agent inspects and changes repository-backed project material | files, diffs, branches, validation results, review state, Git provenance |
+
+The layers can operate independently.
+
+Use ChatGPT Project CI without Codex when conversational control and project files are sufficient.
+
+Use Codex when the worldbuilding project is maintained as a repository and you want file-level changes to be bounded, inspectable, reviewable, and reversible.
+
+Use both when you want the reasoning layer and the repository-maintenance layer to reinforce each other.
+
+---
+
+## Why Codex for lore management?
+
+This repository deliberately explores a use of Codex that is easy to overlook: **repository maintenance does not have to mean software maintenance**.
+
+A large lore repository can have many of the same operational properties as a code repository:
+
+- many interdependent files;
+- state that accumulates over time;
+- local changes with non-local consequences;
+- source and provenance requirements;
+- reviewable diffs;
+- validation rules;
+- branches for isolated experiments;
+- rollback and history;
+- a need to stop at an explicit scope boundary.
+
+The files do not need to contain source code. **The useful abstraction is the repository.**
+
+Codex is optional because not every worldbuilding project needs this machinery. For a small project, ChatGPT Project instructions and project files may be sufficient.
+
+Codex becomes preferable when lore is large enough that repository operations themselves become part of correctness: inspect before editing, trace affected sources, change only what is authorized, validate the result, review the diff, and preserve history.
+
+---
+
+## Why Codex instead of ChatGPT Work?
+
+ChatGPT Work and Codex overlap in some capabilities, but this toolkit chooses Codex for a narrower reason.
+
+**Work is a general-purpose execution mode** for tasks that may span research, files, apps, browser activity, and finished deliverables. **Codex is explicitly oriented around local folders, repositories, terminals, developer tools, diffs, and repository workflows.**
+
+That repository operating model is the property this toolkit wants to reuse for lore maintenance.
+
+Work may still be useful around a worldbuilding project—for research, external information gathering, browser tasks, or cross-application work—but it is not the repository-control layer this toolkit is designed around.
+
+The distinction here is therefore not "Codex is better than Work." It is:
+
+> **Codex matches the repository semantics this toolkit wants to exploit.**
 
 ---
 
@@ -223,7 +289,9 @@ New-Item -ItemType Directory -Force ".\.agents\skills" | Out-Null
 Copy-Item -Recurse ".\skills\milestone-executor" ".\.agents\skills\"
 ```
 
-The ChatGPT Project CI and Codex skill layout solve different problems. Do not assume that a ChatGPT Project consumes `.agents/skills/`, or that another AI provider implements either model the same way.
+The ChatGPT Project CI and Codex skill layout solve different problems. Codex remains optional, but is preferred when project knowledge is maintained as a repository and file-level changes need explicit inspection, validation, review, or provenance.
+
+Do not assume that a ChatGPT Project consumes `.agents/skills/`, or that another AI provider implements either model the same way.
 
 ---
 
