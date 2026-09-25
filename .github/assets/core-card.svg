@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="220" viewBox="0 0 720 220">
+<rect width="720" height="220" rx="28" fill="#0d1117"/>
+<rect x="28" y="28" width="76" height="76" rx="20" fill="#21262d" stroke="#58a6ff" stroke-width="2"/>
+<circle cx="66" cy="66" r="19" fill="none" stroke="#58a6ff" stroke-width="4"/>
+<circle cx="66" cy="66" r="6" fill="#58a6ff"/>
+<text x="128" y="62" fill="#f0f6fc" font-family="Arial,Helvetica,sans-serif" font-size="30" font-weight="700">CORE</text>
+<text x="128" y="96" fill="#8b949e" font-family="Arial,Helvetica,sans-serif" font-size="18">Project state · evidence · scope · uncertainty</text>
+<text x="36" y="154" fill="#c9d1d9" font-family="Arial,Helvetica,sans-serif" font-size="20">Keep drafts, assumptions, simulations, and established lore distinct.</text>
+<text x="36" y="190" fill="#58a6ff" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="700">Open CORE →</text>
+</svg>
