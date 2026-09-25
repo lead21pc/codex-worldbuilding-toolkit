@@ -35,6 +35,15 @@ Either layer can be used alone. Codex is **not required**, but it is the preferr
   </a>
 </p>
 
+## Navigate
+
+| Area | Jump to |
+| --- | --- |
+| **Purpose & positioning** | [What this toolkit is for](#what-this-toolkit-is-for) · [Two parallel layers](#two-parallel-layers) · [Why Codex for lore management?](#why-codex-for-lore-management) · [Why Codex instead of ChatGPT Work?](#why-codex-instead-of-chatgpt-work) |
+| **Architecture & use cases** | [Typical questions](#typical-questions-this-helps-with) · [Architecture at a glance](#architecture-at-a-glance) · [Quick start](#quick-start) · [Codex skills](#codex-skills) · [Examples](#examples) |
+| **Setup** | [Using this in a ChatGPT Project](#using-this-in-a-chatgpt-project) · [Codex setup](#codex-setup) · [Other AI tools](#other-ai-tools) |
+| **Reference & scope** | [Design principles](#design-principles) · [Repository layout](#repository-layout) · [Validation](#validation) · [Attribution and public scope](#attribution-and-public-scope) · [Contributing](#contributing) · [License](#license) |
+
 ---
 
 ## What this toolkit is for
