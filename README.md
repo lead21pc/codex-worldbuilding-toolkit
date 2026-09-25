@@ -363,6 +363,8 @@ The MIT License permits broad reuse, modification, redistribution, sublicensing,
 
 This repository is intentionally a **generalized public subset** of a broader private workflow and instruction architecture.
 
+The private architecture is not merely a larger version of the published toolkit. It includes additional orchestration and control layers that are intentionally not represented by the public module structure.
+
 The published CORE, modules, profiles, skills, examples, and utilities do **not** constitute a complete specification of unpublished routing logic, orchestration, anti-drift implementation, evaluation logic, project-specific rules, private test corpora, private prompts, or other private integration layers.
 
 See [PROVENANCE.md](PROVENANCE.md) for the provenance and public-scope statement.
