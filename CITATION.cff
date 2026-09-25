@@ -1,0 +1,25 @@
+cff-version: 1.2.0
+message: "If you use or reference this toolkit, please cite the original repository and author."
+title: "Worldbuilding CI and Codex Workflow Toolkit"
+version: 1.0.0
+type: software
+authors:
+  - family-names: "lead21pc"
+repository-code: "https://github.com/lead21pc/codex-worldbuilding-toolkit"
+url: "https://github.com/lead21pc/codex-worldbuilding-toolkit"
+license: MIT
+abstract: "A generalized public toolkit of Custom Instructions and Codex skills for consistent AI-assisted worldbuilding, including project-state control, lore and canon consistency, bounded causal simulation, source auditing, scope control, and reusable agent workflows."
+keywords:
+  - worldbuilding
+  - ai-worldbuilding
+  - lore-consistency
+  - canon-management
+  - custom-instructions
+  - ChatGPT
+  - Codex
+  - prompt-engineering
+  - ai-agents
+  - source-audit
+  - scope-control
+  - causal-simulation
+  - knowledge-management
