@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="220" viewBox="0 0 720 220">
+<rect width="720" height="220" rx="28" fill="#0d1117"/>
+<rect x="28" y="28" width="76" height="76" rx="20" fill="#21262d" stroke="#3fb950" stroke-width="2"/>
+<path d="M45 72 C56 42, 74 42, 87 62 C96 76, 83 91, 66 91" fill="none" stroke="#3fb950" stroke-width="4"/>
+<path d="M60 84 L66 92 L57 96" fill="none" stroke="#3fb950" stroke-width="4"/>
+<text x="128" y="62" fill="#f0f6fc" font-family="Arial,Helvetica,sans-serif" font-size="30" font-weight="700">SIMULATION</text>
+<text x="128" y="96" fill="#8b949e" font-family="Arial,Helvetica,sans-serif" font-size="18">Causal paths · transitions · adaptation · second-order effects</text>
+<text x="36" y="154" fill="#c9d1d9" font-family="Arial,Helvetica,sans-serif" font-size="20">Trace consequences without turning plausible outcomes into canon.</text>
+<text x="36" y="190" fill="#3fb950" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="700">Open SIMULATION →</text>
+</svg>
