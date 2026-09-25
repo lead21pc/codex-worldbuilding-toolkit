@@ -171,6 +171,16 @@ These checks validate structure and obvious leakage. They do not prove natural-l
 
 Keep changes narrow and tied to a concrete failure mode. Preserve the independence of the CI and skills, avoid universal source hierarchies or user-specific language defaults, and do not duplicate core rules across modules. See [CONTRIBUTING.md](CONTRIBUTING.md).
 
+## Attribution and public scope
+
+This repository is independently authored and maintained by `lead21pc`, with contributions credited through the repository history.
+
+The MIT License permits broad reuse, modification, redistribution, sublicensing, and commercial use. Copies or substantial portions must retain the copyright notice and MIT permission notice. When referring to this work publicly, attribution to the original repository and author is appreciated.
+
+This repository is a deliberately generalized public subset of a broader private workflow and instruction architecture. The published CI, modules, skills, examples, and utilities are reusable public components; they are not a complete specification of unpublished routing, orchestration, anti-drift implementation, evaluation logic, project-specific rules, or other private integration layers.
+
+See [PROVENANCE.md](PROVENANCE.md) for the repository's provenance and public-scope statement.
+
 ## License
 
 Released under the [MIT License](LICENSE).
