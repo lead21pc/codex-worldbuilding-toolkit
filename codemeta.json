@@ -1,0 +1,41 @@
+{
+  "@context": "https://doi.org/10.5063/schema/codemeta-2.0",
+  "@type": "SoftwareSourceCode",
+  "name": "Worldbuilding CI and Codex Workflow Toolkit",
+  "version": "1.0.0",
+  "description": "Custom Instructions and Codex skills for consistent AI-assisted worldbuilding: preserve lore and project state, prevent scope drift, audit sources, and run bounded causal reasoning.",
+  "codeRepository": "https://github.com/lead21pc/codex-worldbuilding-toolkit",
+  "url": "https://github.com/lead21pc/codex-worldbuilding-toolkit",
+  "license": "https://spdx.org/licenses/MIT.html",
+  "author": {
+    "@type": "Person",
+    "name": "lead21pc",
+    "url": "https://github.com/lead21pc"
+  },
+  "keywords": [
+    "worldbuilding",
+    "ai-worldbuilding",
+    "worldbuilding-tools",
+    "lore",
+    "lore-consistency",
+    "canon-management",
+    "custom-instructions",
+    "ChatGPT",
+    "Codex",
+    "prompt-engineering",
+    "ai-agents",
+    "source-audit",
+    "scope-control",
+    "causal-simulation",
+    "knowledge-management"
+  ],
+  "programmingLanguage": [
+    "Markdown",
+    "Python",
+    "PowerShell"
+  ],
+  "applicationCategory": "AI-assisted worldbuilding toolkit",
+  "isAccessibleForFree": true,
+  "developmentStatus": "active",
+  "readme": "https://github.com/lead21pc/codex-worldbuilding-toolkit/blob/main/README.md"
+}
