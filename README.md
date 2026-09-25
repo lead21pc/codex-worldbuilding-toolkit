@@ -1,8 +1,10 @@
 # Worldbuilding CI and Codex Workflow Toolkit
 
-> Custom Instructions and Codex skills for consistent AI-assisted worldbuilding: preserve lore and project state, prevent scope drift, audit sources, and run bounded causal reasoning.
+> ChatGPT Project Custom Instructions and Codex skills for consistent AI-assisted worldbuilding: preserve lore and project state, prevent scope drift, audit sources, and run bounded causal reasoning.
 
 Version 1.0.0
+
+**Primary target:** the worldbuilding CI is designed for **ChatGPT Projects**. The Codex skills are a separate repository-local workflow layer. Other AI tools may support comparable concepts, but this repository does not assume equivalent instruction precedence, project memory, file scoping, persistence, or runtime behavior across providers.
 
 <p align="center">
   <a href="worldbuilding-ci/core/GENERIC_WORLDBUILDING_CI_CORE.md">
@@ -152,27 +154,86 @@ Start with the smallest example that matches the task:
 
 ---
 
-## Installation
+## Using this in a ChatGPT Project
 
-The worldbuilding CI files are plain instruction text. Copy the selected contents into the instruction context supported by your AI tool.
+The worldbuilding CI was designed around **ChatGPT Projects**, where project-specific files, chats, and instructions can live in one project context.
 
-Codex skills are directories containing a required `SKILL.md`.
+### 1. Put behavioral control in Project Instructions
 
-### Install one skill manually
+Open the ChatGPT Project, then open **Project settings** and place the selected behavioral CI in the project's instruction field.
+
+Start with the smallest sufficient configuration:
+
+- ordinary lore discussion and project-state control → [CORE](worldbuilding-ci/core/GENERIC_WORLDBUILDING_CI_CORE.md)
+- actor, institution, authority, capability, or access reasoning → CORE + [WORLD_MODEL](worldbuilding-ci/modules/WORLD_MODEL.md)
+- causal trajectories or second-order effects → add [SIMULATION](worldbuilding-ci/modules/SIMULATION.md)
+- source scrutiny, contradiction review, or provenance checking → add [AUDIT](worldbuilding-ci/modules/AUDIT.md)
+- all four layers together → [FULL_PROFILE](worldbuilding-ci/profiles/FULL_PROFILE.md)
+
+Do not load FULL_PROFILE merely because it is available. Prefer the lightest configuration that actually matches the project.
+
+### 2. Keep project knowledge as project files
+
+Add the project's actual lore, source material, timelines, rules, manifests, notes, or other reference files to the ChatGPT Project as project sources.
+
+Keep a conceptual separation between:
+
+- **behavioral instructions** — how the model should reason and handle project state;
+- **project sources** — what is actually established, proposed, historical, disputed, or unknown in the world.
+
+The CI should control how sources are interpreted; it should not replace the sources themselves.
+
+### 3. Keep authority rules explicit
+
+If the project has source precedence, supersession rules, canon tiers, continuity layers, or other authority rules, state them explicitly in the project material or Project Instructions.
+
+The toolkit does not invent a universal source hierarchy.
+
+### 4. Use project memory deliberately
+
+ChatGPT Projects can use project-scoped context from chats, files, and instructions. If you use **project-only memory**, keep in mind that the project is intentionally isolated from context outside that project.
+
+The toolkit does not require project-only memory, but long-running worldbuilding projects may benefit from deliberate isolation when outside context would create unwanted bleed.
+
+### 5. Keep the public toolkit separate from project-specific rules
+
+The files in this repository are generic controls. Your actual project may need additional source definitions, naming conventions, continuity rules, or domain-specific constraints.
+
+Keep those project-specific rules in the project itself rather than modifying generic controls unless the behavior truly belongs in every project.
+
+---
+
+## Codex setup
+
+Codex skills are a separate workflow layer for repository work. They are directories containing a required `SKILL.md`.
+
+For repository-local use, copy selected skills into `.agents/skills/` at the target repository root.
+
+Example:
 
 ```bash
-mkdir -p ~/.agents/skills
-cp -R skills/milestone-executor ~/.agents/skills/
+mkdir -p .agents/skills
+cp -R skills/milestone-executor .agents/skills/
 ```
 
 PowerShell:
 
 ```powershell
-New-Item -ItemType Directory -Force "$HOME\.agents\skills" | Out-Null
-Copy-Item -Recurse ".\skills\milestone-executor" "$HOME\.agents\skills\"
+New-Item -ItemType Directory -Force ".\.agents\skills" | Out-Null
+Copy-Item -Recurse ".\skills\milestone-executor" ".\.agents\skills\"
 ```
 
-For repository-local use, copy the selected skill into `.agents/skills/` at the target repository root.
+The ChatGPT Project CI and Codex skill layout solve different problems. Do not assume that a ChatGPT Project consumes `.agents/skills/`, or that another AI provider implements either model the same way.
+
+---
+
+## Other AI tools
+
+The instruction text may be adaptable to other systems that support project-scoped instructions, persistent files, or reusable agent procedures.
+
+However, this repository does **not** claim tested compatibility with Claude, Gemini, or other providers, and it does not prescribe a universal folder structure for them.
+
+When adapting the toolkit elsewhere, verify the target system's actual instruction precedence, file access model, persistence, memory behavior, and tool permissions before assuming equivalent behavior.
 
 ---
 
