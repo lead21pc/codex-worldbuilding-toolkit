@@ -97,6 +97,8 @@ A large lore repository can have many of the same operational properties as a co
 
 The files do not need to contain source code. **The useful abstraction is the repository.**
 
+If you only need a place to organize notes, a conventional worldbuilding wiki or note-taking tool may be simpler. This toolkit becomes useful when AI-assisted changes to a structured body of lore need to be inspected, bounded, reviewed, and traced over time.
+
 Codex is optional because not every worldbuilding project needs this machinery. For a small project, ChatGPT Project instructions and project files may be sufficient.
 
 Codex becomes preferable when lore is large enough that repository operations themselves become part of correctness: inspect before editing, trace affected sources, change only what is authorized, validate the result, review the diff, and preserve history.
