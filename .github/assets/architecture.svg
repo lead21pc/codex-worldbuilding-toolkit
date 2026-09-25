@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="330" viewBox="0 0 1200 330">
+<rect width="1200" height="330" rx="30" fill="#0d1117"/>
+<text x="60" y="68" fill="#f0f6fc" font-family="Arial,Helvetica,sans-serif" font-size="30" font-weight="700">Use only the layers the task needs</text>
+<text x="60" y="102" fill="#8b949e" font-family="Arial,Helvetica,sans-serif" font-size="18">CORE governs interaction and state. Optional modules add explicit reasoning depth.</text>
+<rect x="60" y="150" width="220" height="105" rx="22" fill="#161b22" stroke="#58a6ff" stroke-width="2"/>
+<text x="170" y="195" text-anchor="middle" fill="#f0f6fc" font-family="Arial,Helvetica,sans-serif" font-size="24" font-weight="700">CORE</text>
+<text x="170" y="226" text-anchor="middle" fill="#8b949e" font-family="Arial,Helvetica,sans-serif" font-size="16">always first</text>
+<path d="M280 202 H350" stroke="#484f58" stroke-width="4"/><path d="M340 194 L352 202 L340 210" fill="none" stroke="#484f58" stroke-width="4"/>
+<rect x="355" y="150" width="220" height="105" rx="22" fill="#161b22" stroke="#d2a8ff" stroke-width="2"/>
+<text x="465" y="195" text-anchor="middle" fill="#f0f6fc" font-family="Arial,Helvetica,sans-serif" font-size="22" font-weight="700">WORLD MODEL</text>
+<text x="465" y="226" text-anchor="middle" fill="#8b949e" font-family="Arial,Helvetica,sans-serif" font-size="16">when actors matter</text>
+<path d="M575 202 H645" stroke="#484f58" stroke-width="4"/><path d="M635 194 L647 202 L635 210" fill="none" stroke="#484f58" stroke-width="4"/>
+<rect x="650" y="150" width="220" height="105" rx="22" fill="#161b22" stroke="#3fb950" stroke-width="2"/>
+<text x="760" y="195" text-anchor="middle" fill="#f0f6fc" font-family="Arial,Helvetica,sans-serif" font-size="22" font-weight="700">SIMULATION</text>
+<text x="760" y="226" text-anchor="middle" fill="#8b949e" font-family="Arial,Helvetica,sans-serif" font-size="16">when causality matters</text>
+<path d="M870 202 H940" stroke="#484f58" stroke-width="4"/><path d="M930 194 L942 202 L930 210" fill="none" stroke="#484f58" stroke-width="4"/>
+<rect x="945" y="150" width="195" height="105" rx="22" fill="#161b22" stroke="#f2cc60" stroke-width="2"/>
+<text x="1042" y="195" text-anchor="middle" fill="#f0f6fc" font-family="Arial,Helvetica,sans-serif" font-size="22" font-weight="700">AUDIT</text>
+<text x="1042" y="226" text-anchor="middle" fill="#8b949e" font-family="Arial,Helvetica,sans-serif" font-size="16">when scrutiny matters</text>
+</svg>
